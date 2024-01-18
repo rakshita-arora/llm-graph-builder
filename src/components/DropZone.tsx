@@ -1,29 +1,30 @@
-import React from 'react'
-import { Dropzone, Box } from '@neo4j-ndl/react'
-function DropZone() {
-    return (
-        <Box
-            borderRadius="xl"
-            className="n-bg-palette-primary-bg-weak n-border n-border-palette-primary-border-strong"
-            style={{
-                minWidth: '300px'
-            }}
-        >
-            <Dropzone
-                dropZoneOptions={{
-                    onDrop: function drop(e) {
-                        alert("attempted to upload " + e.length + " file(s). Check console logs for more info")
-                    },
-                    maxFiles: 1,
-                    accept: { 'application/pdf': ['.pdf'] }
-                }}
-                supportedFilesDescription="Supports: Only PDF"
-                
+import { Dropzone, Box } from '@neo4j-ndl/react';
+import { useState } from 'react';
+import FileTable from './FileTable';
 
-            />
-        </Box>
-
-    )
+export default function DropZone() {
+  const [files, setFiles] = useState<Partial<globalThis.File>[] | []>([]);
+  return (
+    <>
+      <Box
+        borderRadius='xl'
+        className='n-bg-palette-primary-bg-weak n-border n-border-palette-primary-border-strong'
+        style={{
+          minWidth: '300px',
+        }}
+      >
+        <Dropzone
+          dropZoneOptions={{
+            accept: { 'application/pdf': ['.pdf'] },
+            onDrop: (f: Partial<globalThis.File>[]) => {
+              if (f.length) {
+                setFiles((files) => [...files, ...f]);
+              }
+            },
+          }}
+        />
+      </Box>
+      <div>{files.length > 0 && <FileTable files={files} />}</div>
+    </>
+  );
 }
-
-export default DropZone
