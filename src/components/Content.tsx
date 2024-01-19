@@ -25,8 +25,8 @@ export default function Content() {
 
   return (
     <>
-      {!showBrowseCard ? <div
-        className='n-bg-palette-neutral-bg-default'
+      <div
+
         style={{
           width: '100%',
           padding: 3,
@@ -36,26 +36,34 @@ export default function Content() {
           gap: 1,
         }}
       >
-        <ConnectionModal
-          open={openConnection}
-          setOpenConnection={setOpenConnection}
-          setConnectionStatus={setConnectionStatus}
-        />
+        <div className='n-bg-palette-neutral-bg-default' style={{
+          width: '100%',
+          padding: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 1,
+        }}>
+          <ConnectionModal
+            open={openConnection}
+            setOpenConnection={setOpenConnection}
+            setConnectionStatus={setConnectionStatus}
+          />
 
-        <Typography variant='body-medium' style={{ display: 'flex', padding: '20px' }}>
-          Neo4j connection Status:
-          <Typography variant='body-medium' style={{ marginLeft: '10px' }}>
-            {!connectionStatus ? <Label color='danger'>Not connected</Label> : <Label color='success'>Connected</Label>}
+          <Typography variant='body-medium' style={{ display: 'flex', padding: '20px' }}>
+            Neo4j connection Status:
+            <Typography variant='body-medium' style={{ marginLeft: '10px' }}>
+              {!connectionStatus ? <Label color='danger'>Not connected</Label> : <Label color='success'>Connected</Label>}
+            </Typography>
           </Typography>
-        </Typography>
 
-        {!connectionStatus ? (
-          <Button onClick={() => setOpenConnection(true)}>Connect to Neo4j</Button>
-        ) : (
-          <Button onClick={() => disconnect().then(() => setConnectionStatus(false))}>Disconnect</Button>
-        )}
-      </div> :
-        <Flex
+          {!connectionStatus ? (
+            <Button onClick={() => setOpenConnection(true)}>Connect to Neo4j</Button>
+          ) : (
+            <Button onClick={() => disconnect().then(() => setConnectionStatus(false))}>Disconnect</Button>
+          )}
+        </div>
+        {connectionStatus && <Flex
           borderRadius="xl"
           flexDirection="column"
           style={{
@@ -63,12 +71,15 @@ export default function Content() {
             padding: '12px',
             justifyContent: "center",
             alignItems: "center",
-            width:"100%"
+            width: "100%",
+            marginTop: "10px"
           }}
         >
           <DropZone />
-        </Flex>
-      }
+        </Flex>}
+
+      </div>
+
     </>
   );
 }

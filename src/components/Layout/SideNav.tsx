@@ -1,8 +1,8 @@
 import { SideNavigation } from '@neo4j-ndl/react';
 import { useState } from 'react';
-import { MagnifyingGlassIconOutline, DbmsIcon, BellAlertIconOutline, EyeIconOutline, EyeSlashIconOutline } from '@neo4j-ndl/react/icons';
-import { useBrowseCardVisibility } from '../../context/BrowseToggle';
-import GraphTable from '../GraphTable';
+// import { MagnifyingGlassIconOutline, DbmsIcon, BellAlertIconOutline, EyeIconOutline, EyeSlashIconOutline } from '@neo4j-ndl/react/icons';
+// import { useBrowseCardVisibility } from '../../context/BrowseToggle';
+// import GraphTable from '../GraphTable';
 // import { EyeIconOutline  } from '@neo4j-ndl/react/icons';
 
 
@@ -12,14 +12,14 @@ import GraphTable from '../GraphTable';
 // <EyeIconOutline className="n-w-6 n-h-6" />
 export default function SideNav() {
   const [expanded, setOnExpanded] = useState(true);
-  const [selected, setSelected] = useState('instances');
-  const handleClick = (item: string) => (e: any) => {
-    e.preventDefault();
-    toggleBrowseCardVisibility()
-    setSelected(item);
-  };
+  // const [selected, setSelected] = useState('instances');
+  // const handleClick = (item: string) => (e: any) => {
+  //   e.preventDefault();
+  //   // toggleBrowseCardVisibility()
+  //   setSelected(item);
+  // };
   const fullSizeClasses = 'n-w-full n-h-full';
-  const { toggleBrowseCardVisibility, showBrowseCard } = useBrowseCardVisibility()
+  // const { toggleBrowseCardVisibility, showBrowseCard } = useBrowseCardVisibility()
   return (
     <div
       style={{
@@ -46,10 +46,10 @@ export default function SideNav() {
           >
             Instances
           </SideNavigation.Item> */}
-          <SideNavigation.Item href="#" selected={selected == "browse"} onClick={handleClick("browse")} icon={showBrowseCard ? <EyeSlashIconOutline></EyeSlashIconOutline> : <EyeIconOutline className="n-w-6 n-h-6" />}
+          {/* <SideNavigation.Item href="#" selected={selected == "browse"} onClick={handleClick("browse")} icon={showBrowseCard ? <EyeSlashIconOutline></EyeSlashIconOutline> : <EyeIconOutline className="n-w-6 n-h-6" />}
           >
             Browse
-          </SideNavigation.Item>
+          </SideNavigation.Item> */}
           {/* <SideNavigation.GroupHeader>Example</SideNavigation.GroupHeader> */}
           {/* <SideNavigation.Item
             href='#'
