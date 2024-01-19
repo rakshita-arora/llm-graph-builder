@@ -57,7 +57,7 @@ export default function Content() {
       </div> :
         <Flex
           borderRadius="xl"
-          flexDirection="row"
+          flexDirection="column"
           style={{
             border: '1px solid rgb(var(--theme-palette-neutral-border-weak))',
             padding: '12px',

@@ -6,13 +6,13 @@ export default function DropZone() {
   const [files, setFiles] = useState<Partial<globalThis.File>[] | []>([]);
   return (
     <>
-      <Box
+       <Box
         borderRadius='xl'
-        className='n-bg-palette-primary-bg-weak n-border n-border-palette-primary-border-strong'
+        className=' n-border n-border-palette-primary-border-strong'
         style={{
-          minWidth: '300px',
+          width:"100%"
         }}
-      >
+      > 
         <Dropzone
           dropZoneOptions={{
             accept: { 'application/pdf': ['.pdf'] },
@@ -24,7 +24,7 @@ export default function DropZone() {
           }}
         />
       </Box>
-      <div>{files.length > 0 && <FileTable files={files} />}</div>
+      <div style={{marginTop:"15px",width:"100%"}}>{files.length > 0 && <FileTable files={files} />}</div>
     </>
   );
 }

@@ -44,6 +44,7 @@ export default function FileTable({ files }: { files: Partial<globalThis.File>[]
             styling={{
               zebraStriping: false,
               borderStyle: 'all-sides',
+              
             }}
           />
         </div>
