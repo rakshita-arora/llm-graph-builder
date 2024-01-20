@@ -3,24 +3,28 @@ import { useState } from 'react';
 import FileTable from './FileTable';
 import axios from 'axios';
 
+interface FileType extends globalThis.File {
+  progress: string;
+  entities: number;
+}
+
 export default function DropZone() {
   const [files, setFiles] = useState<Partial<globalThis.File>[] | []>([]);
 
-  const fileUpload = async (file: any) => {
-    const url = 'http://127.0.0.1:8000/predict';
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const response = await axios.post(
-        `${url}/upload_file`,
-
-        formData
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fileUpload = async (file: any) => {
+  //   const url = 'http://127.0.0.1:8000/predict';
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('file', file);
+  //     const response = await axios.post(
+  //       `${url}/upload_file`,
+  //       formData
+  //     );
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
@@ -37,7 +41,7 @@ export default function DropZone() {
             onDrop: (f: Partial<globalThis.File>[]) => {
               if (f.length) {
                 setFiles((files) => [...files, ...f]);
-                fileUpload(files);
+                // fileUpload(files);
               }
             },
           }}

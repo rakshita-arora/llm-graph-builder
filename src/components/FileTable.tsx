@@ -2,9 +2,18 @@ import { DataGrid } from '@neo4j-ndl/react';
 import { useState, useEffect } from 'react';
 import { useReactTable, getCoreRowModel, createColumnHelper } from '@tanstack/react-table';
 
-export default function FileTable({ files }: { files: Partial<globalThis.File>[] | [] }) {
+interface FileType extends globalThis.File {
+  status: string;
+  progress: string;
+  entities: number;
+}
+
+export default function FileTable({ files }: { files: FileType[] | [] }) {
   const [data, setData] = useState([...files]);
-  const columnHelper = createColumnHelper<Partial<globalThis.File>>();
+  const columnHelper = createColumnHelper<FileType>();
+  const bytesToMB = (bytes: any) => {
+    return (bytes / (1024 * 1024)).toFixed(2) + 'MB';
+  };
   const columns = [
     columnHelper.accessor('name', {
       cell: (info) => info.getValue(),
@@ -12,7 +21,7 @@ export default function FileTable({ files }: { files: Partial<globalThis.File>[]
     }),
     columnHelper.accessor((row) => row.size, {
       id: 'fileSize',
-      cell: (info) => <i>{info.getValue()}</i>,
+      cell: (info) => <i>{bytesToMB(info.getValue())}</i>,
       header: () => <span>File Size</span>,
       footer: (info) => info.column.id,
     }),
@@ -22,7 +31,26 @@ export default function FileTable({ files }: { files: Partial<globalThis.File>[]
       header: () => <span>File Type</span>,
       footer: (info) => info.column.id,
     }),
+    columnHelper.accessor((row) => row.progress, {
+      id: 'status',
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>File Status</span>,
+      footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.status, {
+      id: 'progress',
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>File Progress</span>,
+      footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.entities, {
+      id: 'entities',
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Entities</span>,
+      footer: (info) => info.column.id,
+    }),
   ];
+
   useEffect(() => {
     setData([...files]);
   }, [files]);
@@ -44,7 +72,6 @@ export default function FileTable({ files }: { files: Partial<globalThis.File>[]
             styling={{
               zebraStriping: false,
               borderStyle: 'all-sides',
-              
             }}
           />
         </div>
