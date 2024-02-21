@@ -1,10 +1,9 @@
 import { createContext, useMemo, useState } from 'react';
 import { NeedleThemeProvider, useMediaQuery } from '@neo4j-ndl/react';
 import QuickStarter from '../components/QuickStarter';
-// import BrowseCardWrapper from './BrowseToggle';
 
 export const ThemeWrapperContext = createContext({
-  toggleColorMode: () => { },
+  toggleColorMode: () => {},
   colorMode: 'light' as string,
 });
 
@@ -38,12 +37,10 @@ export default function ThemeWrapper() {
   }
 
   return (
-    // <BrowseCardWrapper>
-      <ThemeWrapperContext.Provider value={themeWrapperUtils}>
-        <NeedleThemeProvider theme={mode as 'light' | 'dark' | undefined} wrapperProps={{ isWrappingChildren: true }}>
-          <QuickStarter />
-        </NeedleThemeProvider>
-      </ThemeWrapperContext.Provider>
-    //  </BrowseCardWrapper>
+    <ThemeWrapperContext.Provider value={themeWrapperUtils}>
+      <NeedleThemeProvider theme={mode as 'light' | 'dark' | undefined} wrapperProps={{ isWrappingChildren: true }}>
+        <QuickStarter />
+      </NeedleThemeProvider>
+    </ThemeWrapperContext.Provider>
   );
 }
